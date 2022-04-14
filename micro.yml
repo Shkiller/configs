@@ -1,0 +1,57 @@
+server:
+  port: 8090
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/technical_support?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&&serverTimezone=UTC
+    username: ENC(s7HRRfxLOcFxweV3RG5r0Q==)
+    password: ENC(y0SDRnC6+wI+ddi/utiuSiwDmKB4o4w3)
+  liquibase:
+    change-log: /db/changelog/changelog-master.xml
+    enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+cloud:
+  aws:
+    credentials:
+      access-key: ENC(PFg1H79aqI0yD49YsVDoyBOsCAiRIvcDYndDcSS6IFM=)
+      secret-key: ENC(dVKAQl96o1YzfCKAtAv1mGxAqKRBNZK9oJ7sJAFzcxntJ/If+ZnIoL+j3+cJaFJ4UmfyCTWBZLo=)
+    sns:
+      enabled: false #Amazon SNS disabling
+    s3:
+      region: ${cloud.yandex.region} #This need for run application
+    sqs:
+      endpoint: https://message-queue.api.cloud.yandex.net/ #endpoint from yandex cloud documentation
+  yandex:
+    region: ru-central1 #region from yandex.cloud documentation
+message:
+  queue:
+    incoming: support_message_queue #queue name, it will create from code
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
+# Ensure application is run in Vaadin 14/npm mode
+vaadin:
+  productionMode: false
+  compatibilityMode: true
+
+logging:
+  level:
+    org.atmosphere: warn
+
+external:
+  mail:
+    key: ENC(K7d4bRWHYCdbITscwoIqPIi9SZx6rbteqan1VTjzniHFyBzcsTb5rogbtnljp3hh)
+    secret: ENC(GXKUX11aEp43FY4B8CpX79OmUI9ryLyY6yHSLBz33RSWAFf47jYk+c1SlLYUuKdG)
+    from: ENC(H4dZAhFspV/470tWbOY7Jk6mllp/EYJYns4oVTKaDqHkMqYtrtBK8Q==)
+    theme: "Вам письмо от технической поддержки ZeroneNetwork!!!"
+

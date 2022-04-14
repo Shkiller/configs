@@ -1,0 +1,100 @@
+server:
+  port: 8086
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql_db_container:3306/network_db?allowPublicKeyRetrieval=true&useSSL=false&&serverTimezone=UTC&autoReconnect=true&maxReconnects=10&zeroDateTimeBehavior=round
+    username: ENC(PWu0QZMimWB0juSsNBfwTQ==)
+    password: ENC(mHsNLn8CIpeE+d2yN1QBSKkGqUdWNZKS)
+  liquibase:
+    change-log: /db/changelog/changelog.yml
+  jpa:
+    show-sql: false
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      ddl-auto: validate
+  servlet:
+    multipart:
+      max-file-size: -1
+      
+services:      
+  redis:
+    host: redis
+    port: 6379
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: admin
+    password: admin
+    exchange: support
+    routingKey: support
+    queue: support
+
+registration:
+  confirm:
+    need: true
+    url: "http://localhost/registration-success"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
+external:
+  vk:
+    id: ENC(m7rHhgvZf1a3XykimmtX9A==)
+    token: ENC(0FWZ/Ebbh5M0GV/ZD8TcXU1ISRbcusF9MrjiZsUnR4Vf4Hv8l7sp32S4w/KWqNsnLI7ppZCPy3ZztKJxXLGkhpBEkJXeEZpE6NFIDCts6BY=)
+  cloudinary:
+    cloud: ENC(Vfhff27NWtbJpMagmXDrAPdoUn5Wl0BP)
+    key: ENC(Dw9PMgrkxd0Q7YTIBowaLFI/ixt2nvHf)
+    secret: ENC(hQVnqsRAm3jW1tjWc3zDAOu19ppToSJ7czBD5CHa0E6coGq36y7wVA==)
+  mail:
+    key: ENC(K7d4bRWHYCdbITscwoIqPIi9SZx6rbteqan1VTjzniHFyBzcsTb5rogbtnljp3hh)
+    secret: ENC(GXKUX11aEp43FY4B8CpX79OmUI9ryLyY6yHSLBz33RSWAFf47jYk+c1SlLYUuKdG)
+    from: ENC(H4dZAhFspV/470tWbOY7Jk6mllp/EYJYns4oVTKaDqHkMqYtrtBK8Q==)
+    theme: "monitor123"
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
+ws: 
+  server: 
+    host: "0.0.0.0"
+    port: 1111
+    
+cors:
+  urls:
+    - http://localhost:8086/
+    - http://localhost:8080/
+    - http://127.0.0.1:8086/
+    - http://127.0.0.1:8080/
+    - http://147.78.64.57/
+    - http://147.78.64.57
+    - http://localhost/
+    - http://127.0.0.1/
+    - http://195.234.208.58/
+    - http://localhost:80/
+    - http://127.0.0.1:80/
+    - http://195.234.208.58:80/
+    - http://www.zeronenetwork.design/
+    - http://10.186.0.2:8086/
+    - http://10.186.0.2/%22
+    - http://www.zeronenetwork.design:8086/
+    - http://www.zeronenetwork.design/
+
+soft:
+  person:
+    month: 3
+  post: 
+    day: 7
+  comment:
+    day: 1

@@ -17,6 +17,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  data:
+   mongodb.host: localhost
+   mongodb.port: 27017
+   mongo.repositories.enabled: true
 
 cloud:
   aws:

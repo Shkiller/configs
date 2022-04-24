@@ -18,7 +18,7 @@ spring:
     hibernate:
       ddl-auto: validate
   data:
-   mongodb.host: localhost
+   mongodb.host: mongodb
    mongodb.port: 27017
    mongo.repositories.enabled: true
 
